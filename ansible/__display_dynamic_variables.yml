@@ -1,7 +1,7 @@
 ---
 # variables from dynamic inventory
 - name: variables from dynamic inventory
-  hosts: "{{ passed_in_hosts }}" 
+  hosts: "{{ passed_in_hosts }}"
   remote_user: ec2-user # user used to connect to AWS servers.
   become: true
   become_method: sudo
@@ -10,15 +10,15 @@
   tasks:
   - name: Debug my ec2 instances
     debug:
-      msg: "hostname: {{ ansible_hostname }}" 
+      msg: "hostname: {{ ansible_hostname }}"
 
   - name: display variables from dynamic inventory
     vars:
       myVar: |
-        Name: {{ tags.Name }} 
-        Instance Id: {{ instance_id }} 
-        Region: {{ placement.region }} 
-        Zone: {{ placement.availability_zone }} 
+        Name: {{ tags.Name }}
+        Instance Id: {{ instance_id }}
+        Region: {{ placement.region }}
+        Zone: {{ placement.availability_zone }}
         Instance Type: {{  instance_type }}
         Public Ip: {{ public_ip_address }}
         Private Ip: {{ private_ip_address }}
@@ -33,7 +33,7 @@
         Key Name: {{ key_name }}
         Root Device: {{ root_device_name }}
         Tags: {{ tags }}
-    debug: 
+    debug:
       msg: "{{ myVar.split('\n') }}"
 
 # ansible-playbook -e "passed_in_hosts=tag_Environment_ssudemo" display_dynamic_variables.yml

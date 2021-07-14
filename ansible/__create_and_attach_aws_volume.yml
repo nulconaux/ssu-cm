@@ -1,10 +1,10 @@
 ---
 # create and attach a new aws volume using dynamic inventory
-- name: create and attach a new aws volume using dynamic inventory 
+- name: create and attach a new aws volume using dynamic inventory
   hosts: "{{ passed_in_hosts }}"
-  gather_facts: False  
-  tasks:   
-    - name: create/attach new volume {{ device_name }} 
+  gather_facts: False
+  tasks:
+    - name: create/attach new volume {{ device_name }}
       connection: local
       ec2_vol:
         aws_access_key: "{{ aws_access_key }}"
@@ -16,9 +16,9 @@
         delete_on_termination: true
         region: "{{ placement.region }}" # variable from dynamic inventory
         zone: "{{ placement.availability_zone }}" # variable from dynamic inventory
-      register: new_volume    
-      
-    - name: tag new volume {{ device_name }} 
+      register: new_volume
+
+    - name: tag new volume {{ device_name }}
       connection: local
       ec2_tag:
         aws_access_key: "{{ aws_access_key }}"

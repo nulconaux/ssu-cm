@@ -5,4 +5,4 @@
   tasks:
   - name: Debug my ec2 instances
     debug:
-      msg: "hostname: {{ ansible_hostname }}" 
+      msg: "hostname: {{ ansible_hostname }}"

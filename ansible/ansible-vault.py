@@ -14,7 +14,7 @@ It is especially useful like this:
     ansible-playbook site.yml --vault-password-file ~/bin/ansible-vault-pass
 or
     ansible-vault edit --vault-password-file ~/bin/ansible-vault-pass example.yml
-Even more practical: 
+Even more practical:
     export ANSIBLE_VAULT_PASSWORD_FILE=~/bin/ansible-vault-pass
 then it will be used by default without specifying it. It is also useful in CI environments.
 Source: https://gist.github.com/toke/ebc49b7dd08d7b87e23921029176d3f5

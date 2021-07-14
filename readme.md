@@ -20,7 +20,7 @@ $ export AWS_DEFAULT_REGION=eu-west-1
 
 $ echo "127.0.0.1" > ~ansible/inventory/hosts
 $ export ANSIBLE_ANSIBLE_SSH_KEYDIR=`pwd`
-$ export ANSIBLE_INVENTORY_ENABLED=amazon.aws.aws_ec2 
+$ export ANSIBLE_INVENTORY_ENABLED=amazon.aws.aws_ec2
 
 $ ANSIBLE_PIPELINING(/etc/ansible/ansible.cfg) = True
 $ DEFAULT_HOST_LIST(/etc/ansible/ansible.cfg) = ['/etc/ansible/hosts']
