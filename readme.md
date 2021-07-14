@@ -1,13 +1,5 @@
-[![CodeFactor](https://www.codefactor.io/repository/github/nulconaux/ssu-cm/badge)](https://www.codefactor.io/repository/github/nulconaux/ssu-cm)
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=nulconaux_ssu-cm&metric=ncloc)](https://sonarcloud.io/dashboard?id=nulconaux_ssu-cm)
-[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=nulconaux_ssu-cm&metric=sqale_index)](https://sonarcloud.io/dashboard?id=nulconaux_ssu-cm)
-[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=nulconaux_ssu-cm&metric=code_smells)](https://sonarcloud.io/dashboard?id=nulconaux_ssu-cm)
-[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=nulconaux_ssu-cm&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=nulconaux_ssu-cm)
+[![CodeFactor](https://www.codefactor.io/repository/github/nulconaux/ssu-cm/badge)](https://www.codefactor.io/repository/github/nulconaux/ssu-cm) [![Lint Repository Source Code](https://github.com/nulconaux/ssu-cm/actions/workflows/linters.yml/badge.svg)](https://github.com/nulconaux/ssu-cm/actions/workflows/linters.yml)
 
-[![Lint Repository Source Code](https://github.com/nulconaux/ssu-cm/actions/workflows/linters.yml/badge.svg)](https://github.com/nulconaux/ssu-cm/actions/workflows/linters.yml)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=nulconaux_ssu-cm&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=nulconaux_ssu-cm)
-[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=nulconaux_ssu-cm&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=nulconaux_ssu-cm)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=nulconaux_ssu-cm&metric=security_rating)](https://sonarcloud.io/dashboard?id=nulconaux_ssu-cm)
 
 <p align="center">
  <img src="https://user-images.githubusercontent.com/29449749/125477424-0a05ad03-20a0-4e6b-85e1-58b683d823df.png">
