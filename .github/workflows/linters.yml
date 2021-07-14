@@ -3,7 +3,6 @@ name: "Lint Repository Source Code"
 on:
   push:
     branches:
-      - main
       - feature/*
       - epic/*
       - fix/*

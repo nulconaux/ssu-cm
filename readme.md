@@ -9,11 +9,11 @@
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=nulconaux_ssu-cm&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=nulconaux_ssu-cm)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=nulconaux_ssu-cm&metric=security_rating)](https://sonarcloud.io/dashboard?id=nulconaux_ssu-cm)
 
-
-# SSU Configuration Management: Packer & Ansible  
-[Slides](https://docs.google.com/presentation/d/1NmYV6Mon-ZOvfmNns8_j4nLCUwK3TS7aZPncHUZvncs/edit#slide=id.gb82011342f_0_91)
- 
-![image](https://user-images.githubusercontent.com/29449749/125477424-0a05ad03-20a0-4e6b-85e1-58b683d823df.png)
+<p align="center">
+ <img src="https://user-images.githubusercontent.com/29449749/125477424-0a05ad03-20a0-4e6b-85e1-58b683d823df.png">
+ <br><br>
+ <a href="https://docs.google.com/presentation/d/1NmYV6Mon-ZOvfmNns8_j4nLCUwK3TS7aZPncHUZvncs/edit#slide=id.gb82011342f_0_91">SSU Configuration Management: Packer & Ansible</a>
+</p>
 
 ## Prepare
 
@@ -109,7 +109,8 @@ ansible-playbook playbooks/PLAYBOOK_NAME.yml --limit "host1"
 
 Limit to multiple hosts
 
-```shansible-playbook playbooks/PLAYBOOK_NAME.yml --limit "host1,host2"
+```sh
+ansible-playbook playbooks/PLAYBOOK_NAME.yml --limit "host1,host2"
 ```
 
 Negated limit. NOTE: Single quotes MUST be used to prevent bash interpolation.
