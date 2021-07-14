@@ -1,0 +1,33 @@
+---
+# requirements.yml
+
+# Install roles from Ansible galaxy (https://galaxy.ansible.com/)
+# to the project roles.galaxy directory.
+#
+#   ansible-galaxy install --roles-path roles.galaxy -r requirements.yml
+#
+#    provisioner "ansible-local" {
+#    galaxy_file = "../ansible/requirements.yml"
+#    }
+#
+#
+# We normally check the downloaded roles into source control to snapshot
+# a working version and ensure availability.
+
+roles:
+  - src: datadog.datadog
+  - src: geerlingguy.ntp
+  - src: geerlingguy.pip
+  - src: jnv.unattended-upgrades
+  - src: geerlingguy.apache
+  - src: geerlingguy.postgresql
+  - src: geerlingguy.php
+  - src: geerlingguy.composer
+
+
+
+collections:
+  - name: amazon.aws
+  - name: community.aws
+  - name: community.grafana
+  - name: devsec.hardening
