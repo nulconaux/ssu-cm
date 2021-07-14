@@ -1,4 +1,4 @@
-[![CodeFactor](https://www.codefactor.io/repository/github/nulconaux/ssu-cm/badge)](https://www.codefactor.io/repository/github/nulconaux/ssu-cm) [![Lint Repository Source Code](https://github.com/nulconaux/ssu-cm/actions/workflows/linters.yml/badge.svg)](https://github.com/nulconaux/ssu-cm/actions/workflows/linters.yml)
+[![CodeFactor](https://www.codefactor.io/repository/github/nulconaux/ssu-cm/badge)](https://www.codefactor.io/repository/github/nulconaux/ssu-cm) [![Lint Repository Source Code](https://github.com/nulconaux/ssu-cm/actions/workflows/linters.yml/badge.svg)](https://github.com/nulconaux/ssu-cm/actions/workflows/linters.yml) [![Sonar Cloud](https://github.com/nulconaux/ssu-cm/actions/workflows/sonarcloud.yml/badge.svg)](https://github.com/nulconaux/ssu-cm/actions/workflows/sonarcloud.yml)
 
 
 <p align="center">
