@@ -1,4 +1,4 @@
-# ansible-playbook -i inventory/localhost.ini __hello.yaml --connection=local -e @extra_vars.yml
+# ansible-playbook -i inventory/localhost.ini __hello.yaml --connection=local -e @_extra_vars.yml
 # https://stackoverflow.com/questions/37184699/ansible-ssh-error-connection-in-localhost/37186096
 ---
 - hosts: localhost
