@@ -55,11 +55,6 @@
 			"clean_staging_directory": true
 		},
 		{
-			"type": "breakpoint",
-			"disable": true,
-			"note": "this is a disabled breakpoint"
-		},
-		{
 			"type": "shell",
 			"inline": [
 				"sudo mkdir -p /opt/lynis && cd /opt/lynis && sudo  git clone https://github.com/CISOfy/lynis .",
