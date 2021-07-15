@@ -4,7 +4,7 @@
 <p align="center">
  <img src="https://user-images.githubusercontent.com/29449749/125477424-0a05ad03-20a0-4e6b-85e1-58b683d823df.png">
  <br><br>
- <a href="https://docs.google.com/presentation/d/1NmYV6Mon-ZOvfmNns8_j4nLCUwK3TS7aZPncHUZvncs/edit#slide=id.gb82011342f_0_91">SSU Configuration Management: Packer & Ansible</a>
+ <a href="https://docs.google.com/presentation/d/1NmYV6Mon-ZOvfmNns8_j4nLCUwK3TS7aZPncHUZvncs/edit?usp=sharing">SSU Configuration Management: Packer & Ansible</a>
 </p>
 
 ## Prepare
