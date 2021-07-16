@@ -48,21 +48,7 @@
 				"echo '\nlynis Results:\n'",
 				"sudo chown -R 0:0 /opt/lynis/ && sudo bash /opt/lynis/lynis audit system --reverse-colors --verbose"
 			]
-		},
-		{
-			"type": "shell",
-			"inline": [
-				"sudo mkdir -p /opt/cis-hardening",
-				"cd /opt/cis-hardening && sudo git clone https://github.com/ovh/debian-cis.git .",
-				"sudo cp debian/default /etc/default/cis-hardening",
-				"sudo mkdir -p /opt/lynis && cd /opt/lynis && sudo  git clone https://github.com/CISOfy/lynis .",
-				"echo '\nHardening Results:\n'",
-				"sudo bash /opt/cis-hardening/bin/hardening.sh --audit-all",
-				"echo '\nDebsecan Results:\n'",
-				"sudo debsecan --format detail",
-				"echo '\nlynis Results:\n'",
-				"sudo chown -R 0:0 /opt/lynis/ && sudo bash /opt/lynis/lynis audit system --reverse-colors --verbose"
-			]
 		}
+
 	]
 }
