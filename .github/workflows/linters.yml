@@ -36,14 +36,6 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          if [ -f requirements.txt ];
-          then pip install --no-cache-dir --no-binary -r requirements.txt;
-          fi
-          echo "CODEQL_PYTHON=$(which python)" >> $GITHUB_ENV
-
       - name: Cache ShiftLeftSecurity vdb
         uses: actions/cache@v2
         with:
