@@ -234,7 +234,7 @@ us-west-2: ami-*
 
 ```bash
 mkdir assets
-cp -R /workstation/terraform/assets/ .
+cp -R assets/ .
 ```
 
 #### Step 4.1.2
