@@ -7,6 +7,22 @@
  <a href="https://docs.google.com/presentation/d/1NmYV6Mon-ZOvfmNns8_j4nLCUwK3TS7aZPncHUZvncs/edit?usp=sharing">SSU Configuration Management: Packer & Ansible</a>
 </p>
 
+
+# Nowaday
+There are two major parts involved: `ansible` and `packer`.
+
+Packer is used to create an image from defined base image, copying ansible directory 
+to that image and running locally a given ansible playbook.
+
+Ansible is used to keep codified configuration of 
+* 'immutable' or occasionally modified image components(like packages, static 
+    parts of configuration etc.);
+*  'dynamic' configuration for instances, depending on a set of instance properties
+    * AWS region
+    * Environment
+    * Instance tags
+    * etc.
+
 ## Prepare
 
 * Export samples
@@ -57,11 +73,9 @@ which packer
 /usr/local/bin/packer
 packer version
 Packer v1.7.2
-```
-
-```
 packer -autocomplete-install
 ```
+
 
 * [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 
@@ -85,6 +99,223 @@ Host <hostname-prefix>*
   User <ssh-login-username>
   StrictHostKeyChecking=no
   UserKnownHostsFile=/dev/null
+```
+
+# How to develop AMIs with Packer and Ansible
+Things I wish they'd told me
+
+## Use in packer templates
+
+Before using ansible provisioning in `packer` next packages should be installed into image:
+* ***python*** >= 2.7
+* ***python-setuptools***
+* ***python-pip***
+* ***ansible*** >= 2.4
+
+```
+{
+  ...
+  "provisioners": [
+    ...
+    {
+      "type": "shell",
+      "inline": [
+        "sleep 10",
+        "sudo yum install -y python2 python-setuptools",
+        "curl 'https://bootstrap.pypa.io/get-pip.py' | sudo python",
+        "sudo pip install ansible"
+      ]
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "../ansible/run_playbook.yaml",
+      "playbook_dir": "../ansible",
+      "role_paths": [
+        "../ansible/roles"
+      ],
+      "clean_staging_directory": true
+    }
+    ...
+  ]
+  ...
+}
+``` 
+
+## Difference between ansible running remotely and locally
+
+When packer starts ansible for `ansible-local` provisioner internal ansible variable 
+`inventory_hostname` is '127.0.0.1'. This way we can distinguish between AMI builds
+and regular ansible runs in role files:
+
+```
+- name: Example AMI stage
+  block:
+    - name: Run on image build only
+      command: echo "local"
+  when: inventory_hostname == '127.0.0.1'
+  
+- name: Example live instance stage
+  block:
+    - name: Run on remote instance only
+      command: echo "remote"
+  when: inventory_hostname != '127.0.0.1'  
+```
+
+## Remote 'live' systems operations
+
+We are using dynamic inventory based on ansible recommended script with a minor changes in code and configuration.
+Example:
+```
+⟫ AWS_PROFILE=teg EC2_INI_PATH=./inventory/ec2.ini ANSIBLE_INVENTORY=./inventory/ec2.py \
+    ansible -m ping tag_Project_SSU_CM
+teg_devops_eu_west_1_openvpn | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+...
+```
+
+## Develop the Ansible role locally
+When you try to debug something in packer by making a change in the Ansible role
+you want to see the effect immediately. To do that just symlink your project
+in `~/.ansible/roles` with whatever name you are referencing it with.
+So, for example, a project refered to as `ansible-role-test` which is locally in `ansible-role-test`:
+```
+`ln -s $(pwd)/ansible-role-test ~/.ansible/roles/ansible-role-test`
+```
+
+## Don't run packer with `-debug`
+If you do this IT WILL ASK YOU FOR INPUT BETWEEN EVERY STEP.
+This is perhaps one of the most annoying debug behavior ever.
+
+##  Take advantage of the Ansible debugger with `-on-error=ask` and a specified keypair
+
+If you've got a box set up (maybe from running packer with `-on-error=ask`) you can run the [ansible debugger](https://docs.ansible.com/ansible/latest/user_guide/playbooks_debugger.html). It's a lot like `pdb` for Ansible.
+
+Now packer will run until an error and then ask you what to do:
+```
+==> my-test-ami: [c] Clean up and exit, [a] abort without cleanup, or [r] retry step (build may fail even if retry succeeds)?
+```
+
+By specifying the keypair you can use a key you already have in AWS to SSH in:
+```
+  "builders": [{
+            "ssh_keypair_name": "the_key_is_automation",
+            "ssh_private_key_file": "~/.ssh/tempKeys/the_key_is_automation.pem",
+            "name": "my-test-ami",
+            "type": "amazon-ebs",
+            ...
+```
+
+Taking a look at what's wrong becomes as easy as SSH:
+```
+ssh -i ~/.ssh/tempkeys/the_key_is_automation.pem ec2-user@xx.xx.xx.xx
+```
+
+## Delete the AMI created by Packer
+
+### First, get the AMI ID value using:
+
+```
+aws ec2 describe-images --filters "Name=tag:Name,Values=my-server*" -region=eu-west-1 --query 'Images[*].{ID:ImageId}'
+```
+
+### Then delete the AMI
+
+```
+aws ec2 deregister-image --image-id ami-<value>
+```
+
+## Launch an instance from the AMI
+First, I launch a new instance from my AMI. I use the same subnet as for Packer, take the ID of the Dedicated Host I created earlier on, and I specify an IAM Role, which has the required permissions to use SSM.
+
+```
+aws ec2 run-instances --instance-type mac1.metal \
+                      --subnet-id subnet-0d3d002af8EXAMPLE \
+                      --image-id ami-0d6fb7542bb0a8da3 \
+                      --region us-east-2 \
+                      --placement HostId=h-03464da766df06f5c \
+                      --iam-instance-profile Name=SSMInstanceRole
+```
+
+## Connecting to the instance
+I can start an SSH session to the instance via SSM with the following command:
+
+```
+aws ssm start-session --target <YOUR_INSTANCE_ID> --region us-east-2
+```
+## [Session Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html)
+
+When using session_manager the machine running Packer must have the AWS Session Manager Plugin installed and within the users' system path. Connectivity via the session_manager interface establishes a secure tunnel between the local host and the remote host on an available local port to the specified ssh_port. See Session Manager Connections for more information.
+
+## Assume Role Configuration
+
+```
+source "amazon-ebs" "example" {
+    assume_role {
+        role_arn     = "arn:aws:iam::ACCOUNT_ID:role/ROLE_NAME"
+        session_name = "SESSION_NAME"
+        external_id  = "EXTERNAL_ID"
+    }
+}
+```
+
+## Packer Filters
+
+Examples
+
+```
+  security_group_filter {
+    filters = {
+      "tag:Class": "packer"
+    }
+  }
+  vpc_filter {
+    filters = {
+      "tag:Name": "myVPC",
+      "isDefault": "false"
+    }
+  }
+  subnet_filter {
+    filters = {
+      "state": "available",
+      "tag:Name": "*public*"
+    }
+    random = true
+  }
+```
+
+This example uses a amazon-ami data source rather than a specific AMI.
+this allows us to use the same filter regardless of what region we're in,
+among other benefits.
+
+```
+data "amazon-ami" "example" {
+  filters = {
+    virtualization-type = "hvm"
+    name                = "*Windows_Server-2012*English-64Bit-Base*"
+    root-device-type    = "ebs"
+  }
+  owners      = ["amazon"]
+  most_recent = true
+  # Access Region Configuration
+  region      = "us-east-1"
+}
+```
+
+```
+  source_ami_filter {
+    filters = {
+       virtualization-type = "hvm"
+       name = "ubuntu/images/\*ubuntu-xenial-16.04-amd64-server-\*"
+       root-device-type = "ebs"
+    }
+    owners = ["099720109477"]
+    most_recent = true
+  }
 ```
 
 ## Limiting Playbook/Task Runs
