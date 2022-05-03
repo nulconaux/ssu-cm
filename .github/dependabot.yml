@@ -1,0 +1,58 @@
+# dependabot.yml file with updates
+
+## TODO: Add support for ecr, terraform, apt, apk, pip, github-releases
+## https://github.com/dependabot/dependabot-core/issues/2129
+## https://github.com/dependabot/dependabot-core/issues/2483w
+## https://github.com/dependabot/dependabot-core/issues/2129
+
+## TODO: Use Amazon ECR pull through cache repositories
+# https://aws.amazon.com/ru/about-aws/whats-new/2021/11/amazon-ecr-cache-repositories/
+# registries:
+#   ecr-docker:
+#     type: docker-registry
+#     url: https://1234567890.dkr.ecr.us-east-1.amazonaws.com
+#     username: ${{secrets.ECR_AWS_ACCESS_KEY_ID}}
+#     password: ${{secrets.ECR_AWS_SECRET_ACCESS_KEY}}
+#   terraform-example:
+#     type: terraform-registry
+#     url: https://terraform.example.com
+#     token: ${{secrets.MY_TERRAFORM_API_TOKEN}}
+
+version: 2
+updates:
+
+#   - package-ecosystem: "docker"
+#     directory: "./docker/"
+#     schedule:
+#       interval: "weekly"
+#       time: "05:00"
+#       timezone: "Europe/London"
+#     open-pull-requests-limit: 10
+#     labels:
+#       - "docker"
+#       - "dependencies"
+#     pull-request-branch-name:
+#       separator: "_"
+
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      time: "05:00"
+      timezone: "Europe/London"
+    open-pull-requests-limit: 10
+    labels:
+      - "github-actions"
+      - "dependencies"
+
+#   - package-ecosystem: "terraform"
+#     directory: "/"
+#     schedule:
+#       interval: "weekly"
+#       time: "05:00"
+#       timezone: "Europe/London"
+#     open-pull-requests-limit: 10
+#     labels:
+#       - "terraform"
+#       - "dependencies"

@@ -29,15 +29,15 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v3.0.2
 
       - name: Set up Python
-        uses: actions/setup-python@v2.2.2
+        uses: actions/setup-python@v3.1.2
         with:
           python-version: '3.x'
 
       - name: Cache ShiftLeftSecurity vdb
-        uses: actions/cache@v2
+        uses: actions/cache@v3.0.1
         with:
           path: |
             ${{ github.workspace }}/vdb
@@ -54,15 +54,15 @@ jobs:
           output: reports
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v1
+        uses: github/codeql-action/init@v2
         with:
           languages: ${{ matrix.language }}
 
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v1
+        uses: github/codeql-action/analyze@v2
 
       - name: Perform Super Linter Analysis
-        uses: github/super-linter@v4.2.2
+        uses: github/super-linter@v4.9.2
         env:
           LOG_LEVEL: VERBOSE
           LOG_FILE: super-linter.log
