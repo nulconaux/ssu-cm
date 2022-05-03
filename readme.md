@@ -1,5 +1,11 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/nulconaux/ssu-cm/badge)](https://www.codefactor.io/repository/github/nulconaux/ssu-cm) [![Lint Repository Source Code](https://github.com/nulconaux/ssu-cm/actions/workflows/linters.yml/badge.svg)](https://github.com/nulconaux/ssu-cm/actions/workflows/linters.yml) [![Sonar Cloud](https://github.com/nulconaux/ssu-cm/actions/workflows/sonarcloud.yml/badge.svg)](https://github.com/nulconaux/ssu-cm/actions/workflows/sonarcloud.yml)
+
+
+[![Git](https://app.soluble.cloud/api/v1/public/badges/3581e874-6fad-44e5-b274-ea0a53c1f969.svg?orgId=847652857951)](https://app.soluble.cloud/repos/details/github.com/nulconaux/ssu-cm?orgId=847652857951)  
+
+=======
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=nulconaux_ssu-cm&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=nulconaux_ssu-cm)
+
 
 <p align="center">
  <img src="https://user-images.githubusercontent.com/29449749/125477424-0a05ad03-20a0-4e6b-85e1-58b683d823df.png">
