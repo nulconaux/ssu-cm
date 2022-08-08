@@ -62,7 +62,7 @@ jobs:
         uses: github/codeql-action/analyze@v2
 
       - name: Perform Super Linter Analysis
-        uses: github/super-linter@v4.9.2
+        uses: github/super-linter@v4.9.6
         env:
           LOG_LEVEL: VERBOSE
           LOG_FILE: super-linter.log
