@@ -167,9 +167,9 @@ and regular ansible runs in role files:
 We are using dynamic inventory based on ansible recommended script with a minor changes in code and configuration.
 Example:
 ```
-⟫ AWS_PROFILE=teg EC2_INI_PATH=./inventory/ec2.ini ANSIBLE_INVENTORY=./inventory/ec2.py \
+⟫ AWS_PROFILE=project EC2_INI_PATH=./inventory/ec2.ini ANSIBLE_INVENTORY=./inventory/ec2.py \
     ansible -m ping tag_Project_SSU_CM
-teg_devops_eu_west_1_openvpn | SUCCESS => {
+project_devops_eu_west_1_openvpn | SUCCESS => {
     "ansible_facts": {
         "discovered_interpreter_python": "/usr/bin/python"
     },
