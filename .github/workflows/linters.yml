@@ -37,7 +37,7 @@ jobs:
           python-version: '3.x'
 
       - name: Cache ShiftLeftSecurity vdb
-        uses: actions/cache@v3.0.1
+        uses: actions/cache@v3.2.5
         with:
           path: |
             ${{ github.workspace }}/vdb
